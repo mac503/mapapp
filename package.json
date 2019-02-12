@@ -35,6 +35,7 @@
     "mapbox-gl-leaflet": "0.0.3",
     "mysql": "^2.16.0",
     "react": "^16.5.2",
+    "react-beforeunload": "^1.0.4",
     "react-contenteditable": "^3.2.6",
     "react-dom": "^16.5.2",
     "react-hot-loader": "^4.6.5",
