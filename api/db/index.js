@@ -12,10 +12,8 @@ db.getPosts = async () => {
   return rows;
 }
 
-db.updatePost = async (id, data) => {
-  let success = await knex('posts')
-  .where({ id: id })
-  .update(data);
+db.postPosts = async (updates) => {
+  let success = await Promise.all(updates.map(update => knex('posts').where({id: update.id}).update(update)));
   return success;
 }
 
