@@ -9,6 +9,15 @@ const getPosts = async () => {
   }
 }
 
+const postPosts = async (updates) => {
+  try{
+    return await db.postPosts(updates);
+  }
+  catch(e) {
+    throw new Error(e.message);
+  }
+}
+
 module.exports = {
-  getPosts
+  getPosts, postPosts
 }
