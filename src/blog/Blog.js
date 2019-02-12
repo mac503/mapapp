@@ -3,7 +3,7 @@ import "./Blog.css";
 import Post from "./Post.js";
 
 export default function Blog(props){
-  const orderedPosts = props.posts.concat().sort((a,b) => a.date > b.date);
+  const orderedPosts = props.posts.concat().sort((a,b) => new Date(a.date) - new Date(b.date));
   const posts = orderedPosts.map((post, i) => (
     <Post
       key={post.id}
