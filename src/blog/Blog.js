@@ -5,7 +5,9 @@ import Post from "./Post.js";
 export default function Blog(props){
   const orderedPosts = props.posts.concat().sort((a,b) => a.date > b.date);
   const posts = orderedPosts.map((post, i) => (
-    <Post key={post.id} {...post}
+    <Post
+      key={post.id}
+      {...post}
       isLoggedIn={props.isLoggedIn}
       newYear={(i==0 || post.date.substr(0,4) != orderedPosts[i-1].date.substr(0,4))}
       newCountry={(i==0 || post.country != orderedPosts[i-1].country)}
