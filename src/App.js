@@ -42,12 +42,17 @@ class App extends Component{
     this.moveMap = this.moveMap.bind(this);
   }
 
-  handleChange(id, prop, value){
-    let posts = this.state.posts;
-    posts.find(x=> x.id == id)[prop] = sanitizeHTML(value, {
+  handleChange(id, prop, value, locationOverride=true){
+    let posts = JSON.parse(JSON.stringify(this.state.posts));
+    const post = posts.find(x=> x.id == id);
+    post[prop] = sanitizeHTML(value, {
       allowedTags: []
     });
-    this.setState({posts:posts});
+    if(prop == 'location' && locationOverride) post.locationOverriden = 1;
+    this.setState({
+      isUnsaved: true,
+      posts: posts
+    });
   }
 
   hideBlog(){
@@ -146,7 +151,9 @@ class App extends Component{
           zoom={this.state.zoom}
           posts={this.state.posts}
           handleMarkerClick={this.handleMarkerClick}
+          handleChange={this.handleChange}
           mapRef={this.mapRef}
+          isLoggedIn={this.state.isLoggedIn}
         />
         {this.state.showBlog ?
           <Blog
