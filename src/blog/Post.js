@@ -56,7 +56,7 @@ export default class Post extends Component{
         </div>
         <div className='post-date-column'>
           {this.props.newYear == true ? <div className='year'>{this.props.date.substr(0,4)}</div> : null }
-          {this.props.newMonth == true ? <div className='month'>{Months[parseInt(this.props.date.substr(5,2))-1]}</div> : null }
+          {this.props.newYear == true || this.props.newMonth == true ? <div className='month'>{Months[parseInt(this.props.date.substr(5,2))-1]}</div> : null }
           <div className='line' />
         </div>
         <div className='post' data-id={this.props.id} onClick={() => this.props.handleClick(this.props.lat, this.props.lng)}>
