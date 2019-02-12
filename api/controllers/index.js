@@ -1,12 +1,21 @@
-const { getPosts } = require('../services');
+const { getPosts, postPosts } = require('../services');
 
 const posts = {
   get: async (req, res, next) => {
     try{
       res.send(await getPosts());
     }
-    catch(e) {
-      console.log(e.message);
+    catch(error) {
+      console.log(error.message);
+      res.sendStatus(500) && next(error);
+    }
+  },
+  post: async(req, res, next) => {
+    try{
+      res.send(await postPosts(req.body));
+    }
+    catch(error) {
+      console.log(error.message);
       res.sendStatus(500) && next(error);
     }
   }
