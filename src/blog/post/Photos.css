@@ -1,0 +1,12 @@
+.photos-holder{
+  margin-top: 0.3em;
+  display: flex;
+}
+
+.photos-holder>img{
+  height: 5em;
+  border: 2px solid white;
+  margin: 2px;
+  margin-bottom: none;
+  cursor: zoom-in;
+}

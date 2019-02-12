@@ -1,0 +1,15 @@
+.photo-modal.modal-content{
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.photo-modal.modal-content img{
+  border: 0.5em solid lightgray;
+  max-height: 90%;
+  max-width: 90%;
+}

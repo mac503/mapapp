@@ -1,0 +1,12 @@
+.camera {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 1em;
+  z-index: 10000;
+  fill: rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+.camera:hover{
+  fill: rgba(0,0,0,0.6);
+}

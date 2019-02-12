@@ -1,0 +1,9 @@
+.login-modal.modal-content{
+  margin: auto;
+  width: 40vw;
+  min-height: 40vh;
+  background-color: lightblue;
+  box-sizing: border-box;
+  padding: 3em;
+  line-height: 1.5em;
+}

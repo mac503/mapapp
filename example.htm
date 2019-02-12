@@ -1,0 +1,231 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+  integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+  crossorigin=""></script>
+  <style>
+    body{
+      background-color: lightblue;
+      margin: 0;
+    }
+    #map{
+      height: 100%;
+      width: 100%;
+    }
+    #posts{
+      position: fixed;
+      top: 2em;
+      right: 2em;
+      width: 40%;
+      height: calc(100% - 8em - 4px);
+      border: 2px solid white;
+      padding: 2em;
+      border-radius: 1em;
+      background-color: #2F4F4F;
+      overflow-y: scroll;
+      z-index: 1000;
+    }
+    .post{
+
+    }
+    .country, .month, .content{
+      display: inline-block;
+    }
+    .country, .month{
+      width: 12%;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: rgba(255,0,0,0.8);
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+    ::-webkit-scrollbar-thumb:window-inactive {
+    	background: rgba(255,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+  <div id = 'map'></div>
+  <div id = 'posts'>
+    <div class = 'post'>
+      <div class='country first'>China</div>
+      <div class='month'>June 2018</div>
+      <div class='content'>
+        Content goes here
+      </div>
+    </div>
+    <div class = 'post'>
+      <div class='country first'>China</div>
+      <div class='month'>June 2018</div>
+      <div class='content'>
+        Content goes here
+      </div>
+    </div>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+    More<br/>
+
+    </div>
+  </div>
+  <script>
+    var mymap = L.map('map').setView([51.505, -0.09], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoibWlrZWNhcnRlciIsImEiOiJjam1uajgxbzUwYm40M2xwM3d5emdlYzB3In0.gnEbTwHtxbLfDJtQZsROSw'
+    }).addTo(mymap);
+
+    var posts = [];
+//    posts.push({});
+    posts.forEach(function(post){
+      drawPost(post);
+    });
+
+    function drawPost(post){
+      var div = document.createElement('div');
+      div.className = 'post';
+      div.dataset.id = post.id;
+      div.innerHTML = `
+        <div class='postDetails'>
+          <div class='title'>{post.title}</div><div class='date'>{post.startTime}</div><div class='time'>{post.startTime != null ? post.startTime : ''}</div>
+          <div class='content'>{post.content}</div>
+        </div>
+      `;
+      div.marker = L.marker([post.lat, post.lng]).addTo(mymap).on('click', showPost(post.id));
+      document.querySelector()
+    }
+
+    function showPost(id){
+      var postsDiv = document.querySelector('#posts');
+      if(postsDiv && postsDiv.classList.contains('hidden')) postsDiv.classList.remove('hidden');
+      document.querySelector(`[data-id='{id}']`).scrollIntoView({behaviour:"smooth"});
+    }
+
+    document.querySelector('#posts').addEventListener('scroll', function(e){
+//      if()
+      console.log(e.target.scrollTop);
+    });
+
+    function produceClosestPostsList(postId){
+      var list = [posts.find(x => x.id == postId)];
+      var origin = posts.indexOf(list[0]);
+      var x = 1;
+      var post = null;
+      while(posts[origin+x] || posts[origin-x]){
+        if(post = posts[origin+x]) list.push(post);
+        if(post = posts[origin-x]) list.push(post);
+        x++;
+      }
+      return list;
+    };
+
+
+
+  /*post{
+    lat: 1,
+    lng: 1,
+    date: ,
+    hasTime: ,
+    endDate: ,
+    endDateHasTime: ,
+    country: "",
+    title: "", //initially set to the place
+    description: "",
+    photos: []
+  }*/
+  </script>
+</body>
+</html>
