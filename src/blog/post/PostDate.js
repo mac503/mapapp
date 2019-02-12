@@ -9,7 +9,20 @@ export default function PostDate(props){
   const time = date.substr(16, 5);
   return (
     props.isLoggedIn
-    ? <><input className='post-date' type='date' value={inputDate} /> <input className='time' type='time' value={time} /></>
+    ? <>
+        <input
+          className='post-date'
+          type='date'
+          value={inputDate}
+          onChange={(e)=> props.handleChange(e, 'date')}
+        />
+        <input
+          className='time'
+          type='time'
+          value={time}
+          onChange={(e)=> props.handleChange(e, 'time')}
+        />
+      </>
     : <div className='post-date'>{dateString}<Time time={time} /></div>
   );
 }

@@ -15,7 +15,21 @@ export default class Post extends Component{
   }
 
   handleChange(e, property){
-    this.props.handleChange(this.props.id, property, e.target.value);
+    let value = e.target.value;
+    if(property == 'date'){
+      const date = new Date(Date.parse(this.props.date)).toString();
+      let newDate = new Date(e.target.value);
+      newDate.setHours(date.substr(16,2), date.substr(19,2));
+      value = newDate.toISOString();
+    }
+    else if(property == 'time'){
+      let newDate = new Date(this.props.date);
+      const timeSplit = e.target.value.split(':');
+      newDate.setHours(parseInt(timeSplit[0]), parseInt(timeSplit[1]));
+      property = 'date';
+      value = newDate.toISOString();
+    }
+    this.props.handleChange(this.props.id, property, value);
   }
 
   render(){
