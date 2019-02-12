@@ -10,6 +10,7 @@ export default function Blog(props){
       {...post}
       isLoggedIn={props.isLoggedIn}
       newYear={(i==0 || post.date.substr(0,4) != orderedPosts[i-1].date.substr(0,4))}
+      newMonth={(i==0 || post.date.substr(5,2) != orderedPosts[i-1].date.substr(5,2))}
       newCountry={(i==0 || post.country != orderedPosts[i-1].country)}
       handleClick={props.handlePostClick}
       handleChange={props.handleChange}/>

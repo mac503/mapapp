@@ -7,6 +7,7 @@ import PostDate from './post/PostDate';
 import Photos from './post/Photos';
 import './Post.css';
 import CountryColors from './CountryColors';
+import Months from './Months';
 
 export default class Post extends Component{
   constructor(props){
@@ -50,20 +51,24 @@ export default class Post extends Component{
         <div
           className='post-country-column'
           style={{background:background}}
-          >{this.props.newCountry == true ? this.props.country : null }</div>
-        <div className='post-content-wrapper'>
-          <div className='post-date-row'>{this.props.newYear == true ? <span>{this.props.date.substr(0,4)}</span> : null}</div>
-          <div className='post' data-id={this.props.id} onClick={() => this.props.handleClick(this.props.lat, this.props.lng)}>
-            <PostDate
-              date={this.props.date}
-              isLoggedIn={this.props.isLoggedIn}
-              handleChange={this.handleChange}
-            />
-            <div className='location-wrapper'><Location handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} location={this.props.location}/> <Latlng lat={this.props.lat} lng={this.props.lng} /></div>
-            <Photos photos={this.props.photos}/>
-            <Title handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} title={this.props.title}/>
-            <PostContent handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} content={this.props.content}/>
-          </div>
+        >
+          {this.props.newCountry == true ? this.props.country : null }
+        </div>
+        <div className='post-date-column'>
+          {this.props.newYear == true ? <div className='year'>{this.props.date.substr(0,4)}</div> : null }
+          {this.props.newMonth == true ? <div className='month'>{Months[parseInt(this.props.date.substr(5,2))-1]}</div> : null }
+          <div className='line' />
+        </div>
+        <div className='post' data-id={this.props.id} onClick={() => this.props.handleClick(this.props.lat, this.props.lng)}>
+          <PostDate
+            date={this.props.date}
+            isLoggedIn={this.props.isLoggedIn}
+            handleChange={this.handleChange}
+          />
+          <div className='location-wrapper'><Location handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} location={this.props.location}/> <Latlng lat={this.props.lat} lng={this.props.lng} /></div>
+          <Photos photos={this.props.photos}/>
+          <Title handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} title={this.props.title}/>
+          <PostContent handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} content={this.props.content}/>
         </div>
       </div>
     );
