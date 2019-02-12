@@ -1,6 +1,8 @@
 .photos-holder{
+  max-width: 40%;
   margin-top: 0.3em;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .photos-holder>img{
