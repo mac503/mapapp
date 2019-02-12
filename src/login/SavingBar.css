@@ -1,0 +1,14 @@
+#savingBar{
+  background: transparent;
+  position: fixed;
+  width: 100%;
+  z-index: 5000;
+  text-align: center;
+  color: white;
+  padding: 2px;
+  cursor: pointer;
+}
+#savingBar span{
+  background-color: black;
+  padding: 0.2em;
+}
