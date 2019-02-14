@@ -1,0 +1,20 @@
+.post .add-photos-panel{
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: lightgray;
+  min-width: 50%;
+  padding: 1em;
+  cursor: zoom-out;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  padding-bottom: 1.5em;
+}
+
+.add-photos-panel .photos-holder{
+  cursor: zoom-out;
+}
+
+.add-photos-panel .photos-holder img{
+  cursor: pointer;
+  margin: 0.25em;
+  border: 0;
+}

@@ -1,0 +1,13 @@
+.add-photo-button{
+  fill: rgba(0,0,0,0.3);
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding: 0.125em;
+  display: inline-block;
+  align-self: baseline;
+}
+.add-photo-button:hover{
+  fill: rgba(0,0,0,0.5);
+  cursor: pointer;
+}

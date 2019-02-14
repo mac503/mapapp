@@ -1,0 +1,24 @@
+.add {
+  height: 90px;
+  width: 90px;
+  vertical-align: middle;
+  background-color: transparent;
+  stroke: rgba(0,0,0,0.3);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  position: fixed;
+  bottom: 0;
+  left: 110px;
+  margin: 1em;
+  z-index: 10000;
+  cursor: pointer;
+}
+.add:hover {
+  stroke: rgba(0,0,0,0.6);
+}
+.add.dropPins {
+  stroke: rgba(255,255,255,0.6);
+}
+.add.dropPins:hover {
+  stroke: rgba(255,255,255,1);
+}
