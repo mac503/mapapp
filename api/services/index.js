@@ -1,4 +1,6 @@
 const { db } = require('../db');
+const multer = require('multer');
+const { promisify } = require('util');
 
 const getPosts = async () => {
   try{
@@ -18,6 +20,48 @@ const postPosts = async (updates) => {
   }
 }
 
+const postPhotos = async (req, res) => {
+  try{
+    const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, 'public/photos')
+      },
+      filename: function (req, file, cb) {
+        cb(null, Buffer.from(file.originalname + Date.now()).toString('base64')+file.originalname.match(/\.[0-9a-z]+$/i));
+      }
+    });
+
+    const fileFilter = (req, file, cb) => {
+      const acceptables = [
+        'image/gif',
+        'image/png',
+        'image/jpeg',
+        'image/bmp'
+      ];
+      if(acceptables.includes(file.mimetype)) cb(null, true)
+      else cb(null, false);
+    };
+
+    const upload = promisify(
+      multer({
+        storage: storage,
+        fileFilter: fileFilter
+      }).array('photos')
+    );
+
+    return await upload(req, res).then(async (err)=>{
+      if(err) throw new Error(err);
+      else{
+        return await db.postPhotos(req.files.map(x=> ({filename: x.filename})));
+      }
+    });
+
+  }
+  catch(e) {
+    throw new Error(e.message);
+  }
+}
+
 module.exports = {
-  getPosts, postPosts
+  getPosts, postPosts, postPhotos
 }
