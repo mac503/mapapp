@@ -29,6 +29,7 @@ class App extends Component{
       currentSavingPosts: [],
       isUnsaved: false,
       isSaving: false,
+      isUploadingPhotos: false,
     }
     this.mapRef = React.createRef();
     fetch('/api/posts/')
@@ -218,7 +219,7 @@ class App extends Component{
   }
 
   uploadPhotos(e){
-    if(e.target.files.length > 0){
+    if(this.state.isUploadingPhotos == false && e.target.files.length > 0){
       const formData = new FormData();
       for(let i=0; i<e.target.files.length; i++){
         const blob = e.target.files[i];
@@ -229,8 +230,13 @@ class App extends Component{
           'image/bmp'
         ].includes(blob.type)) formData.append('photos', e.target.files[i]);
       }
+      e.target.value = '';
       if(formData.has('photos') == false) return;
-      else fetch('http://localhost:5000/api/photos', {
+      //else
+      this.setState({
+        isUploadingPhotos: true
+      });
+      fetch('http://localhost:5000/api/photos', {
         method: 'POST',
         body: formData
       })
@@ -241,7 +247,8 @@ class App extends Component{
         console.log('Success:', JSON.stringify(response));
         const photos = this.state.photos.concat(response);
         this.setState({
-          photos: photos
+          photos: photos,
+          isUploadingPhotos: false
         });
       })
       .catch(error => console.error('Error:', error));
@@ -303,7 +310,7 @@ class App extends Component{
         }
         {this.state.isLoggedIn
           ? <>
-              <Photos handleChange={this.uploadPhotos} />
+              <Photos handleChange={this.uploadPhotos} isUploadingPhotos={this.state.isUploadingPhotos} />
               <Add handleClick={this.toggleDropPins} dropPinsAllowed={this.state.dropPinsAllowed} />
             </>
           : null
