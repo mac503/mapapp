@@ -17,7 +17,7 @@ db.getPosts = async () => {
 db.postPosts = async (changes) => {
   //new posts
   let newIdsMap = {};
-  const newPosts = await JSON.parse(JSON.stringify(changes)).filter(x=>x.isNew == true).map(async newPost => {
+  const newPosts = await Promise.all(JSON.parse(JSON.stringify(changes)).filter(x=>x.isNew == true).map(async newPost => {
     console.log(newPost.photos);
     delete newPost.isNew;
     delete newPost.photos;
@@ -26,7 +26,7 @@ db.postPosts = async (changes) => {
     console.log('A NEW POST\n');
     console.log(newPost);
     return await knex('posts').insert(newPost).then((id)=>newIdsMap[tempId] = id[0]);
-  });
+  }));
   //updates to photos
   const photos = changes.filter(x=>x.photos != undefined).map(async change =>{
     console.log('Now working on photos.');
