@@ -66,7 +66,14 @@ export default class Post extends Component{
             handleChange={this.handleChange}
           />
           <div className='location-wrapper'><Location handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} location={this.props.location}/> <Latlng lat={this.props.lat} lng={this.props.lng} /></div>
-          <Photos photos={this.props.photos}/>
+          <Photos
+            photos={this.props.photos}
+            allPhotos={this.props.allPhotos}
+            addPhoto={this.props.addPhoto}
+            isLoggedIn={this.props.isLoggedIn}
+            postId={this.props.id}
+            removePhoto={this.props.removePhoto}
+          />
           <Title handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} title={this.props.title}/>
           <PostContent handleChange={this.handleChange} isLoggedIn={this.props.isLoggedIn} content={this.props.content}/>
         </div>

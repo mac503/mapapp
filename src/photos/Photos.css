@@ -10,3 +10,13 @@
 .camera:hover{
   fill: rgba(0,0,0,0.6);
 }
+.camera label{
+  cursor: pointer;
+}
+.camera input[type="file"]{
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}

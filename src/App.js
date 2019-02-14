@@ -7,6 +7,7 @@ import LoginModal from "./login/LoginModal";
 import Map from "./map/Map";
 import Blog from "./blog/Blog";
 import Photos from "./photos/Photos";
+import Add from "./map/Add";
 import sanitizeHTML from "sanitize-html";
 import BeforeUnload from "react-beforeunload";
 

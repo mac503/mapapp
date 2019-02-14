@@ -5,10 +5,26 @@
   flex-wrap: wrap;
 }
 
-.photos-holder>img{
+.photos-holder>.photo-wrapper{
+  position: relative;
+}
+
+.photos-holder>.photo-wrapper>img{
   height: 5em;
   border: 2px solid white;
   margin: 2px;
   margin-bottom: none;
   cursor: zoom-in;
+}
+
+.photos-holder>.photo-wrapper>.remove-image{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1em;
+  height: 1em;
+  stroke: white;
+  stroke-width: 5;
+  margin: 0.125em;
+  cursor: pointer;
 }

@@ -21,8 +21,14 @@ export default class Photo extends Component{
     const src = '/photos/'+this.props.filename;
     return (
       <>
-        <img src={src} onClick={this.handleClick} />
-        {this.state.zoom ? <PhotoModal filename={src} outerClick={this.handleClick} /> : null}
+        <div className='photo-wrapper'>
+          <img src={src} onClick={this.handleClick} />
+          {this.state.zoom ? <PhotoModal filename={src} outerClick={this.handleClick} /> : null}
+          {this.props.isLoggedIn
+            ? <div className='remove-image' data-id={this.props.photoId} onClick={(e) => this.props.removePhoto(e, this.props.postId)}>
+              <svg viewBox="0 0 40 40"><path d="M 10,10 L 30,30 M 30,10 L 10,30"></path></svg>
+            </div>: null}
+        </div>
       </>
     );
   }

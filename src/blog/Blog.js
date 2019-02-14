@@ -8,12 +8,16 @@ export default function Blog(props){
     <Post
       key={post.id}
       {...post}
+      allPhotos={props.photos}
+      addPhoto={props.addPhoto}
       isLoggedIn={props.isLoggedIn}
       newYear={(i==0 || post.date.substr(0,4) != orderedPosts[i-1].date.substr(0,4))}
       newMonth={(i==0 || post.date.substr(5,2) != orderedPosts[i-1].date.substr(5,2))}
       newCountry={(i==0 || post.country != orderedPosts[i-1].country)}
       handleClick={props.handlePostClick}
-      handleChange={props.handleChange}/>
+      handleChange={props.handleChange}
+      removePhoto={props.removePhoto}
+    />
   ));
   return (
     <div id='blog'>
