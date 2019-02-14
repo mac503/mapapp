@@ -51,6 +51,7 @@ class App extends Component{
     this.uploadPhotos = this.uploadPhotos.bind(this);
     this.addPhoto = this.addPhoto.bind(this);
     this.removePhoto = this.removePhoto.bind(this);
+    this.escapeDropPoint = this.escapeDropPoint.bind(this);
   }
 
   handleChange(id, prop, value, locationOverride=true){
@@ -61,6 +62,8 @@ class App extends Component{
     post[prop] = sanitizeHTML(value, {
       allowedTags: []
     });
+    if(value == null)
+    post[prop] = null;
     if(prop == 'location' && locationOverride) post.locationOverriden = 1;
     this.setState({
       isUnsaved: true,
@@ -151,6 +154,12 @@ class App extends Component{
     this.setState({
       photos: photos
     });
+  }
+
+  escapeDropPoint(e){
+    if(e.keyCode == 27 && this.state.dropPinsAllowed){
+      this.toggleDropPins();
+    }
   }
 
   save(){
@@ -260,10 +269,12 @@ class App extends Component{
       () => this.save(),
       10000 //save every 10 seconds
     );
+    document.addEventListener("keydown", this.escapeDropPoint, false);
   }
 
   componentWillUnmount() {
     clearInterval(this.timerID);
+    document.removeEventListener("keydown", this.escapeDropPoint, false);
   }
 
   render(){
