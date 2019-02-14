@@ -1,6 +1,7 @@
 import { Map, Marker, Tooltip, Popup } from 'react-leaflet';
 import MapBoxGLLayer from './mapbox';
 import React, {Component, createRef} from "react";
+import "./Map.css";
 
 export default class LeafletMap extends Component{
   constructor(props){
@@ -13,13 +14,7 @@ export default class LeafletMap extends Component{
     this.props.handleChange(id, 'lat', latLng.lat);
     this.props.handleChange(id, 'lng', latLng.lng);
     const post = this.props.posts.find(x=> x.id == id);
-    fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+latLng.lat+'&lon='+latLng.lng)
-      .then(response => response.json())
-      .then(json => {
-        console.log(json.address);
-        this.props.handleChange(id, 'location', json.address.city || json.address.town || json.address.village || json.address.locality || json.address.state_district || 'Location Unknown', false);
-        this.props.handleChange(id, 'country', json.address.country);
-      });
+    this.props.fetchLocation(id, latLng.lat, latLng.lng);
   }
 
   render(){
@@ -39,7 +34,13 @@ export default class LeafletMap extends Component{
       )
     });
     return (
-      <Map center={position} zoom={this.props.zoom} ref={this.props.mapRef}>
+      <Map
+        center={position}
+        zoom={this.props.zoom}
+        ref={this.props.mapRef}
+        className={this.props.dropPinsAllowed ? 'dropPins' : null}
+        onClick={this.props.handleMapClick}
+      >
         <MapBoxGLLayer
           accessToken="pk.eyJ1IjoibWlrZWNhcnRlciIsImEiOiJjam1uajgxbzUwYm40M2xwM3d5emdlYzB3In0.gnEbTwHtxbLfDJtQZsROSw"
           style="mapbox://styles/mapbox/outdoors-v10"
