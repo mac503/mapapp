@@ -2,19 +2,25 @@
   border: 1px solid gray;
   border-radius: 5px;
   background-color: lightgray;
-  min-width: 50%;
+  min-width: 40%;
+  max-width: 75%;
+  height: 80%;
   padding: 1em;
   cursor: zoom-out;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   padding-bottom: 1.5em;
+  overflow: hidden;
 }
 
 .add-photos-panel .photos-holder{
   cursor: zoom-out;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .add-photos-panel .photos-holder img{
   cursor: pointer;
   margin: 0.25em;
   border: 0;
+  height: 5em;
 }
