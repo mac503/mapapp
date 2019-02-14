@@ -13,10 +13,20 @@
 .camera label{
   cursor: pointer;
 }
+.camera.block label{
+  cursor: not-allowed;
+}
 .camera input[type="file"]{
   opacity: 0;
   position: absolute;
   pointer-events: none;
   width: 1px;
   height: 1px;
+}
+.camera .is-uploading-indicator{
+  width: 100%;
+  text-align: center;
+  color: black;
+  position: relative;
+  top: .5em;
 }
