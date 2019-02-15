@@ -24,7 +24,7 @@ const postPhotos = async (req, res) => {
   try{
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {
-        cb(null, 'public/photos')
+        cb(null, __dirname+'./../../public/photos')
       },
       filename: function (req, file, cb) {
         cb(null, Buffer.from(file.originalname + Date.now()).toString('base64')+file.originalname.match(/\.[0-9a-z]+$/i));
