@@ -2,11 +2,11 @@
   "name": "mapapp",
   "version": "1.0.0",
   "description": "",
-  "main": "api.js",
+  "main": "api/api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently --kill-others \"webpack-dev-server --mode development\" \"nodemon\"",
-    "build": "webpack --mode development"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -30,11 +30,18 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "knex": "^0.16.3",
     "leaflet": "^1.4.0",
     "mapbox-gl-leaflet": "0.0.3",
+    "multer": "^1.4.1",
+    "mysql": "^2.16.0",
     "react": "^16.5.2",
+    "react-beforeunload": "^1.0.4",
+    "react-contenteditable": "^3.2.6",
     "react-dom": "^16.5.2",
+    "react-flip-move": "^3.0.3",
     "react-hot-loader": "^4.6.5",
-    "react-leaflet": "^2.2.0"
+    "react-leaflet": "^2.2.0",
+    "sanitize-html": "^1.20.0"
   }
 }

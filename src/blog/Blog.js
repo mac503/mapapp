@@ -1,6 +1,7 @@
 import React from "react";
 import "./Blog.css";
 import Post from "./Post.js";
+import FlipMove from 'react-flip-move';
 
 export default function Blog(props){
   const orderedPosts = props.posts.concat().sort((a,b) => new Date(a.date) - new Date(b.date));
@@ -27,7 +28,9 @@ export default function Blog(props){
         </svg>
       </div>
       <div className='content'>
-        {posts}
+        <FlipMove>
+          {posts}
+        </FlipMove>
       </div>
     </div>
   );
