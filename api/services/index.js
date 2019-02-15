@@ -14,7 +14,7 @@ const getPosts = async () => {
 const postPosts = async (updates) => {
   try{
     return await db.postPosts(updates.map(x=>{
-      x.date = x.date.split('.')[0].replace('T', ' ');
+      if(x.hasOwnProperty('date')) x.date = x.date.split('.')[0].replace('T', ' ');
       return x;
     }));
   }
