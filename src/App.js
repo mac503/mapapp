@@ -15,7 +15,7 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: false,
       userName: 'mike',
       showLoginModal: false,
       showBlog: true,
@@ -52,6 +52,7 @@ class App extends Component{
     this.addPhoto = this.addPhoto.bind(this);
     this.removePhoto = this.removePhoto.bind(this);
     this.escapeDropPoint = this.escapeDropPoint.bind(this);
+    this.toggleLogin = this.toggleLogin.bind(this);
   }
 
   handleChange(id, prop, value, locationOverride=true){
@@ -264,6 +265,12 @@ class App extends Component{
     }
   }
 
+  toggleLogin(){
+    this.setState({
+      isLoggedIn: !this.state.isLoggedIn,
+    })
+  }
+
   componentDidMount() {
     this.timerID = setInterval(
       () => this.save(),
@@ -292,7 +299,7 @@ class App extends Component{
         />
         {this.state.showLoginModal ? <LoginModal /> : null}
         <SavingBar isSaving={this.state.isSaving} isUnsaved={this.state.isUnsaved} />
-        <UserBar isLoggedIn={this.state.isLoggedIn} userName={this.state.userName} />
+        <UserBar handleClick={this.toggleLogin} isLoggedIn={this.state.isLoggedIn} userName={this.state.userName} />
         <Map
           lat={this.state.lat}
           lng={this.state.lng}

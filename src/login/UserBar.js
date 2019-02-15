@@ -3,7 +3,7 @@ import "./UserBar.css";
 
 export default function UserBar(props){
   return (
-    <div id='userBar'>
+    <div id='userBar' onClick={props.handleClick}>
       {props.isLoggedIn ? 'Logout' : 'Edit'}
     </div>
   );
