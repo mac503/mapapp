@@ -27,7 +27,7 @@ const postPhotos = async (req, res) => {
         cb(null, __dirname+'./../../public/photos')
       },
       filename: function (req, file, cb) {
-        cb(null, file.originalname);// Buffer.from(file.originalname + Date.now()).toString('base64')+file.originalname.match(/\.[0-9a-z]+$/i));
+        cb(null, Buffer.from(file.originalname + Date.now()).toString('base64')+file.originalname.match(/\.[0-9a-z]+$/i));
       }
     });
 
