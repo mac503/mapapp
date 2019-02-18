@@ -28,17 +28,14 @@ db.postPosts = async (changes) => {
     return await knex('posts').insert(newPost).then((id)=>newIdsMap[tempId] = id[0]);
   }));
   //updates to photos
-  const photos = changes.filter(x=>x.photos != undefined).map(async change =>{
-    console.log('Now working on photos.');
-    console.log(change.location);
-    console.log(change.photos);
-    console.log(change.id);
-    console.log(newIdsMap);
+  const photos = changes.filter(x=>x.hasOwnProperty('photos')).map(async change =>{
     if(newIdsMap.hasOwnProperty(change.id)) change.id = newIdsMap[change.id];
+    knex('photos').where({postId: change.id}).then(console.log);
     const deletions = await knex('photos').where({postId: change.id}).update({postId: null});
+    let setPhotos = [];
+    if(change.photos != null) setPhotos = change.photos.split(',').map(photoId=> knex('photos').where({id: photoId}).update({postId: change.id}));
     return await Promise.all(
-      change.photos.split(',').map(photoId=> knex('photos').where({id: photoId}).update({postId: change.id}))
-      .concat(deletions)
+      setPhotos.concat(deletions)
     );
   });
   //all other updates
